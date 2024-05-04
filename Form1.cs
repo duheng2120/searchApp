@@ -61,9 +61,11 @@ namespace searchApp
         //加载CSV文件
         private DataTable LoadCsv(string filePath)
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);//注册Nuget包System.Text.Encoding.CodePages中的编码到.NET Core
             DataTable dt = new DataTable();
-            using (StreamReader sr = new StreamReader(filePath))
+            using (StreamReader sr = new StreamReader(filePath, Encoding.GetEncoding("gb2312")))
             {
+                Trace.WriteLine(sr.CurrentEncoding.EncodingName.ToString());
                 // 读取表头
                 string[] headers = sr.ReadLine().Split(split_char);
                 foreach (string header in headers)
