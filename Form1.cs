@@ -1,3 +1,4 @@
+using System;
 using System.Data;
 using System.Diagnostics;
 using System.Globalization;
@@ -22,6 +23,8 @@ namespace searchApp
             dialog.Multiselect = false;//该值确定是否可以选择多个文件
             dialog.Title = "请选择文件";
             dialog.Filter = "表格文件(*.csv)|*.csv";
+            Trace.WriteLine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase);
+            dialog.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory; 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 tbFilePath.Text = dialog.FileName;
